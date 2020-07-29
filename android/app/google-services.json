@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "202751078678",
+    "firebase_url": "https://gps-app-9c8b3.firebaseio.com",
+    "project_id": "gps-app-9c8b3",
+    "storage_bucket": "gps-app-9c8b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202751078678:android:7f098dbe38295cf3c72037",
+        "android_client_info": {
+          "package_name": "com.gps_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202751078678-9uvm5svbhuam7ebqkb85rqk2132vrafl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh21SwW6rDCenKRZRK8mCMBGRfMoIHDdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202751078678-9uvm5svbhuam7ebqkb85rqk2132vrafl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
