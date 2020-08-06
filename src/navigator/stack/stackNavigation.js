@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from "../../screens/Login";
 import Home from "../../screens/Home";
 import Register from "../../screens/Register";
+import DrawerNavigation from '../drawer/drawerNavigation';
 
 const MainStack = createStackNavigator();
 

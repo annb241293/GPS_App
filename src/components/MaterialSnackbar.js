@@ -34,7 +34,8 @@ class MaterialSnackbar extends Component {
                 this.animatedValue,
                 {
                     toValue: 150,
-                    duration: 400
+                    duration: 400,
+                    useNativeDriver: false
                 }
             ).start(() => {
                 this.ShowSnackBar = false;

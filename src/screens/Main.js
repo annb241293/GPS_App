@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Dimensions, PermissionsAndroid, Platform, Alert } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, Image, PermissionsAndroid, Platform, Alert } from "react-native";
 import MaterialButton from "../components/MaterialButton";
 import {
     GoogleSignin,
@@ -12,22 +12,27 @@ import { request, PERMISSIONS, checkMultiple } from 'react-native-permissions';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MapNavigation from "../components/MapNavigation";
 
-const mapWidth = Dimensions.get('window').width;
-const mapHeight = Dimensions.get('window').height;
-const LATITUDE_DELTA = 0.05;
 
 const HomeScreen = (props) => {
-
-    const [latitude, setLatitude] = useState(37.78825);
-    const [longitude, setLongitude] = useState(-122.4324);
-    const [latDelta, setLatDelta] = useState(LATITUDE_DELTA);
-    const ASPECT_RATIO = mapWidth / mapHeight;
-    const LONGITUDE_DELTA = latDelta * ASPECT_RATIO;
-
 
     useEffect(() => {
         requestLocationPermission()
     }, [])
+
+    // const requestLocationPermission = async () => {
+    //     if (Platform === 'ios') {
+    //         let response = await PermissionsAndroid.request()
+    //         // let response = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
+    //         if (response == 'granted') {
+    //             getPosition()
+    //         }
+    //     } else {
+    //         let response = await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+    //         if (response == 'granted') {
+    //             getPosition()
+    //         }
+    //     }
+    // }
 
     const requestLocationPermission = async () => {
         try {
@@ -44,7 +49,7 @@ const HomeScreen = (props) => {
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                 console.log("You can use locations ")
-                getPosition()
+                // getPosition()
             } else {
                 console.log("Location permission denied")
             }
@@ -58,11 +63,10 @@ const HomeScreen = (props) => {
         // Geolocation.requestAuthorization();
         Geolocation.getCurrentPosition(
             position => {
-                // const initialPosition = JSON.stringify(position);
+                const initialPosition = JSON.stringify(position);
                 // this.setState({ initialPosition });
-                console.log('initialPosition', position);
-                setLatitude(position.coords.latitude)
-                setLongitude(position.coords.longitude)
+                console.log('initialPosition', initialPosition);
+
             },
             error => Alert.alert('Error', JSON.stringify(error)),
             { enableHighAccuracy: false, timeout: 20000 },
@@ -83,10 +87,10 @@ const HomeScreen = (props) => {
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
                 region={{
-                    latitude: latitude,
-                    longitude: longitude,
-                    latitudeDelta: latDelta,
-                    longitudeDelta: LONGITUDE_DELTA,
+                    latitude: 21.0123794,
+                    longitude: 105.8110763,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
                 }}
             />
             <MapNavigation style={{ position: 'absolute', elevation: 10, left: 10, top: 85 }}
