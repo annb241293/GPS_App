@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image} from "react-native";
 
-function HeaderThreeButton ({navPress, searchPress, morePress, bgColor='transparent', title='', isHome=false, shadow=true, enableMore=true}) {
+function HeaderThreeButton ({navPress, searchPress, morePress, bgColor='orange', title='', isHome=false, shadow=true, enableMore=true}) {
 
     return (
         <View style={{
@@ -20,7 +20,7 @@ function HeaderThreeButton ({navPress, searchPress, morePress, bgColor='transpar
                 </TouchableOpacity>
             )}
             {!isHome && (
-                <TouchableOpacity onPress={navPress} style={{padding: 10}}>
+                <TouchableOpacity onPress={()=>{console.log('menu');}} style={{padding: 10}}>
                     <Image source={require('../assets/icon/ic_chevron_left.png')} style={{height: 18, width: 18, resizeMode: 'contain'}}/>
                 </TouchableOpacity>
             )}
@@ -37,4 +37,4 @@ function HeaderThreeButton ({navPress, searchPress, morePress, bgColor='transpar
     );
 }
 
-export default HeaderThreeButton;
+export default HeaderThreeButton; 

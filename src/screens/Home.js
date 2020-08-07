@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Dimensions, PermissionsAndroid, Platform, Alert } from "react-native";
-import MaterialButton from "../components/MaterialButton";
-import {
-    GoogleSignin,
-    statusCodes,
-} from '@react-native-community/google-signin';
-import { CommonActions } from '@react-navigation/native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import Geolocation from '@react-native-community/geolocation';
-import { request, PERMISSIONS, checkMultiple } from 'react-native-permissions';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import Geolocation from 'react-native-geolocation-service';
 import MapNavigation from "../components/MapNavigation";
+import HeaderThreeButton from "../components/HeaderThreeButton";
 
 const mapWidth = Dimensions.get('window').width;
 const mapHeight = Dimensions.get('window').height;
@@ -18,8 +11,8 @@ const LATITUDE_DELTA = 0.05;
 
 const HomeScreen = (props) => {
 
-    const [latitude, setLatitude] = useState(37.78825);
-    const [longitude, setLongitude] = useState(-122.4324);
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
     const [latDelta, setLatDelta] = useState(LATITUDE_DELTA);
     const ASPECT_RATIO = mapWidth / mapHeight;
     const LONGITUDE_DELTA = latDelta * ASPECT_RATIO;
@@ -55,17 +48,14 @@ const HomeScreen = (props) => {
 
 
     const getPosition = () => {
-        // Geolocation.requestAuthorization();
         Geolocation.getCurrentPosition(
             position => {
-                // const initialPosition = JSON.stringify(position);
-                // this.setState({ initialPosition });
                 console.log('initialPosition', position);
                 setLatitude(position.coords.latitude)
                 setLongitude(position.coords.longitude)
             },
             error => Alert.alert('Error', JSON.stringify(error)),
-            { enableHighAccuracy: false, timeout: 20000 },
+            { enableHighAccuracy: true, maximumAge: 2000, timeout: 20000 },
         );
     }
 
@@ -73,11 +63,7 @@ const HomeScreen = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <TouchableOpacity
-                style={{ backgroundColor: "red" }}
-                onPress={getPosition}>
-                <Text>ok </Text>
-            </TouchableOpacity>
+            <HeaderThreeButton />
             <MapView
                 style={{ flex: 1 }}
                 provider={PROVIDER_GOOGLE}
@@ -92,7 +78,7 @@ const HomeScreen = (props) => {
             <MapNavigation style={{ position: 'absolute', elevation: 10, left: 10, top: 85 }}
                 zoomInPress={() => setLatDelta(latDelta / 2)}
                 zoomOutPress={() => setLatDelta(latDelta * 2)}
-                myLocationPress={() => snackbarRef.current.ShowSnackBarFunction('button my location clicked')} />
+                myLocationPress={getPosition} />
         </View>
     );
 }
